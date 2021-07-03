@@ -1,9 +1,10 @@
 {
 	"compilerOptions": {
 		"module": "commonjs",
-		"target": "ES2015",
-		"sourceMap": true
+		"target": "es6",
+		"sourceMap": true,
+		"outDir": "dist"
 	},
-	"include": ["index.ts"],
+	"include": ["src/**/*"],
 	"exclude": ["node_modules"]
 }
