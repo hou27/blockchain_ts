@@ -1,0 +1,19 @@
+{
+  "name": "typescriptprac",
+  "version": "1.0.0",
+  "description": "Practice typescript by making a Blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/hou27/typescriptPrac.git"
+  },
+  "author": "hou27",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hou27/typescriptPrac/issues"
+  },
+  "homepage": "https://github.com/hou27/typescriptPrac#readme"
+}
