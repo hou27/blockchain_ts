@@ -1,7 +1,6 @@
 import * as CryptoJS from "crypto-js";
 
 class Block {
-	/*
   public static calculateHash = (
     index: number,
     previousHash: string,
@@ -16,7 +15,7 @@ class Block {
     typeof aBlock.previousHash === "string" &&
     typeof aBlock.timestamp === "number" &&
     typeof aBlock.data === "string";
-	*/
+
   public index: number;
   public hash: string;
   public previousHash: string;
@@ -40,7 +39,13 @@ class Block {
 
 const genesisBlock: Block = new Block(0, "23092490202", "", 123456, "HiHi");
 
-let blockchain: [Block] = [genesisBlock];
+let blockchain: Block[] = [genesisBlock];
+
+const getBlockchain = (): Block[] => blockchain;
+
+const getNewestBlock = (): Block => blockchain[blockchain.length - 1];
+
+const getNewTimestamp = (): number => Math.round(new Date().getTime() / 1000);
 
 console.log(blockchain);
 
