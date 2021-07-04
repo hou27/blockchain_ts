@@ -39,22 +39,47 @@
 
 //object 넘기기
 
-interface Human {
-	name: string;
-	age: number;
-	gender: string;
+// interface Human {
+// 	name: string;
+// 	age: number;
+// 	gender: string;
+// }
+
+// const person = {
+// 	name: 'hou',
+// 	age: 22,
+// 	gender: 'male'
+// };
+
+// const testFunc = (person: Human): string => {
+// 	return `Hi ${person.name}, age - ${person.age}, gender - ${person.gender}`;
+// }
+
+// console.log(testFunc(person));
+
+/**
+ *
+ */
+
+//class
+
+class Human {
+	public name: string;
+	private age: number;
+	public gender: string;
+	constructor(name: string, age: number, gender: string) {
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+	}
 }
 
-const person = {
-	name: 'hou',
-	age: 22,
-	gender: 'male'
-};
+const Hou = new Human("Hou27", 22, "male");
 
 const testFunc = (person: Human): string => {
 	return `Hi ${person.name}, age - ${person.age}, gender - ${person.gender}`;
 }
 
-console.log(testFunc(person));
+console.log(testFunc(Hou));
 
 export {};

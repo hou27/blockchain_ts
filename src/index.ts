@@ -1,60 +1,47 @@
-/**
- *
- */
+import * as CryptoJS from "crypto-js";
 
-// const name = 'hou'
-// 	, age = 22
-// 	, gender = 'male';
+class Block {
+	/*
+  public static calculateHash = (
+    index: number,
+    previousHash: string,
+    timestamp: number,
+    data: string
+  ): string =>
+    CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
 
-// //if you add ? on argument, that argu will be optional.
-// const testFunc = (name, age, gender?) => {
-// 	console.log(`Hi ${name}, age - ${age}, gender - ${gender}`);
-// }
+  public static validateStructure = (aBlock: Block): boolean =>
+    typeof aBlock.index === "number" &&
+    typeof aBlock.hash === "string" &&
+    typeof aBlock.previousHash === "string" &&
+    typeof aBlock.timestamp === "number" &&
+    typeof aBlock.data === "string";
+	*/
+  public index: number;
+  public hash: string;
+  public previousHash: string;
+  public data: string;
+  public timestamp: number;
 
-// testFunc(name, age, gender);
-
-/**
- *
- */
-
-// const testFunc = (name: string, age: number, gender: string) => {
-// 	console.log(`Hi ${name}, age - ${age}, gender - ${gender}`);
-// }
-
-// testFunc("hou", '22', 'male');
-
-/**
- *
- */
-
-// const testFunc = (name: string, age: number, gender: string): string => {
-// 	return `Hi ${name}, age - ${age}, gender - ${gender}`;
-// }
-
-// console.log(testFunc("hou", 22, 'male'));
-
-/**
- *
- */
-
-//object 넘기기
-
-interface Human {
-	name: string;
-	age: number;
-	gender: string;
+  constructor(
+    index: number,
+    hash: string,
+    previousHash: string,
+    timestamp: number,
+    data: string
+  ) {
+    this.index = index;
+    this.hash = hash;
+    this.previousHash = previousHash;
+    this.timestamp = timestamp;
+    this.data = data;
+  }
 }
 
-const person = {
-	name: 'hou',
-	age: 22,
-	gender: 'male'
-};
+const genesisBlock: Block = new Block(0, "23092490202", "", 123456, "HiHi");
 
-const testFunc = (person: Human): string => {
-	return `Hi ${person.name}, age - ${person.age}, gender - ${person.gender}`;
-}
+let blockchain: [Block] = [genesisBlock];
 
-console.log(testFunc(person));
+console.log(blockchain);
 
 export {};
