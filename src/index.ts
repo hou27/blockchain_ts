@@ -9,12 +9,12 @@ class Block {
   ): string =>
     CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
 
-  public static validateStructure = (aBlock: Block): boolean =>
-    typeof aBlock.index === "number" &&
-    typeof aBlock.hash === "string" &&
-    typeof aBlock.previousHash === "string" &&
-    typeof aBlock.timestamp === "number" &&
-    typeof aBlock.data === "string";
+  public static validateStructure = (anyBlock: Block): boolean =>
+    typeof anyBlock.index === "number" &&
+    typeof anyBlock.hash === "string" &&
+    typeof anyBlock.previousHash === "string" &&
+    typeof anyBlock.timestamp === "number" &&
+    typeof anyBlock.data === "string";
 
   public index: number;
   public hash: string;
@@ -48,25 +48,60 @@ const getNewestBlock = (): Block => blockchain[blockchain.length - 1];
 const getNewTimestamp = (): number => Math.round(new Date().getTime() / 1000);
 
 const createNewBlock = (data: string): Block => {
-  const previousBlock: Block = getNewestBlock();
-  const nextIndex: number = previousBlock.index + 1;
-  const nextTimestamp: number = getNewTimestamp();
-  const nextHash: string = Block.calculateHash(
-    nextIndex,
-    previousBlock.hash,
-    nextTimestamp,
-    data
-  );
-  const newBlock: Block = new Block(
-    nextIndex,
-    nextHash,
-    previousBlock.hash,
-    nextTimestamp,
-    data
-  );
-  return newBlock;
+	const previousBlock: Block = getNewestBlock();
+	const nextIndex: number = previousBlock.index + 1;
+	const nextTimestamp: number = getNewTimestamp();
+	const nextHash: string = Block.calculateHash(
+	nextIndex,
+	previousBlock.hash,
+	nextTimestamp,
+	data
+	);
+	const newBlock: Block = new Block(
+	nextIndex,
+	nextHash,
+	previousBlock.hash,
+	nextTimestamp,
+	data
+	);
+
+	addBlock(newBlock);
+
+	return newBlock;
 };
 
-console.log(createNewBlock("rah"), createNewBlock("bye"));
+const getHashForBlock = (anyBlock: Block): string =>
+  Block.calculateHash(
+    anyBlock.index,
+    anyBlock.previousHash,
+    anyBlock.timestamp,
+    anyBlock.data
+  );
 
+const isNewBlockValid = (candidateBlock: Block, previousBlock: Block): boolean => {
+	if (!Block.validateStructure(candidateBlock)) {
+	console.log("This Block isn't valid");
+	return false;
+	} else if (previousBlock.index + 1 !== candidateBlock.index) {
+	return false;
+	} else if (previousBlock.hash !== candidateBlock.previousHash) {
+	return false;
+	} else if (getHashForBlock(candidateBlock) !== candidateBlock.hash) {
+	return false;
+	} else {
+	return true;
+	}
+};
+
+const addBlock = (candidateBlock: Block): void => {
+  if (isNewBlockValid(candidateBlock, getNewestBlock())) {
+    blockchain.push(candidateBlock);
+  }
+};
+
+createNewBlock("second");
+createNewBlock("third");
+createNewBlock("fourth");
+
+console.log(blockchain);
 export {};
